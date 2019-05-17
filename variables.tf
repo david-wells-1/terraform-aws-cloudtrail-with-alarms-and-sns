@@ -1,6 +1,6 @@
 variable "region" {
   type        = "string"
-  description = "The AWS region where resources are created"
+  description = "The AWS regions where resources are created"
 }
 
 variable "cloudtrail_name" {
