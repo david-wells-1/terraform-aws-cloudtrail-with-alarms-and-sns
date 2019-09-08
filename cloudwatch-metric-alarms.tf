@@ -63,7 +63,6 @@ resource "aws_cloudwatch_metric_alarm" "CloudTrailVpcChanges" {
   period              = "300"
   statistic           = "Sum"
   threshold           = "1"
-  alarm_description   = ""
   treat_missing_data  = "notBreaching"
   alarm_actions       = ["${aws_sns_topic.sns_topic_default.arn}"]
   alarm_description   = "Alarms when an API call is made to create, update or delete a VPC, VPC peering connection or VPC connection to classic."
