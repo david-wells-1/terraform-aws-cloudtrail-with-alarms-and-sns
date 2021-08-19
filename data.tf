@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "cloudtrail_assume_policy" {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
-    principals = {
+    principals {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]
     }
@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
   statement {
     effect = "Allow"
 
-    principals = {
+    principals {
       type        = "AWS"
       identifiers = ["*"]
     }
@@ -49,7 +49,7 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
 
     resources = ["arn:aws:sns:${var.region}:${data.aws_caller_identity.current_user.account_id}:${var.sns_topic}"]
 
-    condition = {
+    condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
       values   = ["${data.aws_caller_identity.current_user.account_id}"]
@@ -62,7 +62,7 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
     sid    = "AWSCloudTrailPermissionsCheck"
     effect = "Allow"
 
-    principals = {
+    principals {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]
     }
@@ -75,7 +75,7 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
     sid    = "AWSCloudTrailWrite"
     effect = "Allow"
 
-    principals = {
+    principals {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]
     }
@@ -83,7 +83,7 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
     actions   = ["s3:PutObject"]
     resources = ["arn:aws:s3:::${var.bucket_name}/*"]
 
-    condition = {
+    condition {
       test     = "StringEquals"
       variable = "s3:x-amz-acl"
       values   = ["bucket-owner-full-control"]
