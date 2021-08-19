@@ -18,14 +18,14 @@ This terraform module will create an AWS CloudTrail which is configured with an 
 module "cloudtrail" {
   source = "git::https://github.com/david-wells-1/terraform-aws-cloudtrail-with-alarms-and-sns.git"
 
-  region                     = "${var.region}"
-  cloudtrail_name            = "${var.cloudtrail_name}"
+  region                     = var.region
+  cloudtrail_name            = var.cloudtrail_name
   multi_region_trail         = true
   enable_logging             = true
   enable_log_file_validation = true
-  cloudwatch_log_group       = "${var.cloudwatch_log_group}"
-  sns_topic                  = "${var.sns_topic}"
-  bucket_name                = "${var.bucket_name}"
+  cloudwatch_log_group       = var.cloudwatch_log_group
+  sns_topic                  = var.sns_topic
+  bucket_name                = var.bucket_name
 }
 ```
 ## CloudWatch Alarms
