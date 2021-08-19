@@ -1,10 +1,10 @@
 variable "region" {
-  type        = "string"
+  type        = string
   description = "The AWS regions where resources are created"
 }
 
 variable "cloudtrail_name" {
-  type        = "string"
+  type        = string
   description = "Specifies the name of the trail"
 }
 
@@ -24,16 +24,16 @@ variable "enable_log_file_validation" {
 }
 
 variable "cloudwatch_log_group" {
-  type        = "string"
+  type        = string
   description = "The name of the log group to be created"
 }
 
 variable "sns_topic" {
-  type        = "string"
+  type        = string
   description = "The friendly name for the SNS topic to be created"
 }
 
 variable "bucket_name" {
-  type        = "string"
+  type        = string
   description = "The name of the s3 bucket to be created"
 }
