@@ -35,8 +35,7 @@ resource "aws_iam_policy" "cloudtrail_access_policy" {
 resource "aws_iam_policy_attachment" "cloudtrail_access_policy_attachment" {
   name       = "${var.cloudtrail_name}-policy-attachment"
   policy_arn = aws_iam_policy.cloudtrail_access_policy.arn
-  roles = [
-  "${aws_iam_role.cloudtrail_role.name}"]
+  roles      = ["${aws_iam_role.cloudtrail_role.name}"]
 }
 
 resource "aws_sqs_queue" "cloudtrail_topic_default" {
