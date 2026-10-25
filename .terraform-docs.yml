@@ -1,0 +1,36 @@
+formatter: "markdown table"
+
+version: ""
+
+# 💡 Core settings to prevent tables from breaking on GitHub
+settings:
+  anchor: true
+  blank: true         # Adds empty spacer lines between table components
+  escape: true        # Escapes special characters like | so they don't break table rows
+  hide-empty: true    # Hides a table completely if it has no data (e.g., no outputs)
+  html: true          # Uses raw HTML line breaks (<br>) for complex types inside cells
+  indent: 2
+
+# 💡 Creates explicit vertical breathing room between your markdown headers and tables
+content: |-
+  {{ .Header }}
+
+  ## Requirements
+  
+  {{ .Requirements }}
+
+  ## Providers
+  
+  {{ .Providers }}
+
+  ## Modules
+  
+  {{ .Modules }}
+
+  ## Inputs
+  
+  {{ .Inputs }}
+
+  ## Outputs
+  
+  {{ .Outputs }}
