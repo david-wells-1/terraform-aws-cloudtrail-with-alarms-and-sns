@@ -1,4 +1,4 @@
-data "aws_caller_identity" "current_user" {}
+data "aws_caller_identity" "current" {}
 
 data "aws_iam_policy_document" "cloudtrail_assume_policy" {
   statement {
@@ -16,13 +16,13 @@ data "aws_iam_policy_document" "cloudtrail_policy" {
   statement {
     effect    = "Allow"
     actions   = ["logs:CreateLogStream"]
-    resources = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current_user.account_id}:log-group:*:log-stream:*"]
+    resources = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:log-group:*:log-stream:*"]
   }
 
   statement {
     effect    = "Allow"
     actions   = ["logs:PutLogEvents"]
-    resources = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current_user.account_id}:log-group:*:log-stream:*"]
+    resources = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:log-group:*:log-stream:*"]
   }
 }
 
@@ -47,12 +47,12 @@ data "aws_iam_policy_document" "cloudtrail_alarm_policy" {
       "SNS:Receive",
     ]
 
-    resources = ["arn:aws:sns:${var.region}:${data.aws_caller_identity.current_user.account_id}:${var.sns_topic}"]
+    resources = ["arn:aws:sns:${var.region}:${data.aws_caller_identity.current.account_id}:${var.sns_topic}"]
 
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
-      values   = ["${data.aws_caller_identity.current_user.account_id}"]
+      values   = ["${data.aws_caller_identity.current.account_id}"]
     }
   }
 }
@@ -81,7 +81,7 @@ data "aws_iam_policy_document" "cloudtrail_bucket" {
     }
 
     actions   = ["s3:PutObject"]
-    resources = ["arn:aws:s3:::${var.bucket_name}/*"]
+    resources = ["arn:aws:s3:::${var.bucket_name}/AWSLogs/${data.aws_caller_identity.current.account_id}/*"]
 
     condition {
       test     = "StringEquals"
